@@ -20,7 +20,7 @@ public interface StatisticsRepository extends JpaRepository<HitEntity, Long> {
             "   end " +
             ") " +
             "from HitEntity h " +
-            "where (h.request_time between :start and :end)" +
+            "where (h.timestamp between :start and :end)" +
             "   and h.uri in :uris " +
             "group by h.app, h.uri " +
             "order by 3 desc")
