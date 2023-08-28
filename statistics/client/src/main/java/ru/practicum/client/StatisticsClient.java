@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-import ru.practicum.dto.RequestHtiDto;
+import ru.practicum.dto.RequestHitDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,7 +27,7 @@ public class StatisticsClient extends BaseClient {
         );
     }
 
-    public ResponseEntity<Object> postHit(RequestHtiDto hitDto) {
+    public ResponseEntity<Object> postHit(RequestHitDto hitDto) {
         return post("/hit", hitDto);
     }
 

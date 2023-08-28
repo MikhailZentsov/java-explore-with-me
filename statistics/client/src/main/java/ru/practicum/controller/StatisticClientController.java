@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.practicum.aspect.log.ToLog;
 import ru.practicum.client.StatisticsClient;
-import ru.practicum.dto.RequestHtiDto;
+import ru.practicum.dto.RequestHitDto;
 import ru.practicum.validator.StartBeforeEndDateConstraint;
 
 import javax.validation.Valid;
@@ -31,7 +31,7 @@ public class StatisticClientController {
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> createHit(@RequestBody @Valid RequestHtiDto hitDto) {
+    public ResponseEntity<Object> createHit(@RequestBody @Valid RequestHitDto hitDto) {
         return client.postHit(hitDto);
     }
 

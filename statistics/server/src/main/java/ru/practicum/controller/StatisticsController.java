@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import ru.practicum.aspect.log.ToLog;
-import ru.practicum.dto.RequestHtiDto;
+import ru.practicum.dto.RequestHitDto;
 import ru.practicum.dto.ResponseHitDto;
 import ru.practicum.service.StatisticService;
 
@@ -27,7 +27,7 @@ public class StatisticsController {
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createHit(@RequestBody RequestHtiDto hitDto) {
+    public void createHit(@RequestBody RequestHitDto hitDto) {
         service.createHit(hitDto);
     }
 

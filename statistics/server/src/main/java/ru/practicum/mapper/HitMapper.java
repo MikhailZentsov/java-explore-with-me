@@ -1,12 +1,12 @@
 package ru.practicum.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.practicum.dto.RequestHtiDto;
+import ru.practicum.dto.RequestHitDto;
 import ru.practicum.model.HitEntity;
 
 @UtilityClass
 public class HitMapper {
-    public HitEntity toHitEntityFromRequestHitDto(RequestHtiDto hitDto) {
+    public HitEntity toHitEntityFromRequestHitDto(RequestHitDto hitDto) {
         return HitEntity.builder()
                 .app(hitDto.getApp())
                 .uri(hitDto.getUri())

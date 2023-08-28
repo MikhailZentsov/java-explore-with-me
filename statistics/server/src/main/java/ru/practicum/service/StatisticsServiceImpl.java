@@ -3,7 +3,7 @@ package ru.practicum.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.dto.RequestHtiDto;
+import ru.practicum.dto.RequestHitDto;
 import ru.practicum.dto.ResponseHitDto;
 import ru.practicum.mapper.HitMapper;
 import ru.practicum.repository.StatisticsRepository;
@@ -18,7 +18,7 @@ public class StatisticsServiceImpl implements StatisticService {
     private final StatisticsRepository repository;
 
     @Override
-    public void createHit(RequestHtiDto hitDto) {
+    public void createHit(RequestHitDto hitDto) {
         repository.save(HitMapper.toHitEntityFromRequestHitDto(hitDto));
     }
 
