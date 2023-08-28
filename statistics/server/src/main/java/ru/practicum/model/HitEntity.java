@@ -32,5 +32,5 @@ public class HitEntity {
 
     private String ip;
 
-    private LocalDateTime request_time;
+    private LocalDateTime timestamp;
 }

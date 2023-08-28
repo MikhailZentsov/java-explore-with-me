@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS hit
     app          VARCHAR(255)                            NOT NULL,
     uri          VARCHAR(255)                            NOT NULL,
     ip           VARCHAR(255)                            NOT NULL,
-    request_time TIMESTAMP WITHOUT TIME ZONE             NOT NULL,
+    timestamp TIMESTAMP WITHOUT TIME ZONE             NOT NULL,
     CONSTRAINT PK_USER PRIMARY KEY (id)
 );
