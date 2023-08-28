@@ -15,13 +15,13 @@ public interface StatisticsRepository extends JpaRepository<HitEntity, Long> {
             "   h.app, " +
             "   h.uri, " +
             "   case when :unique = true " +
-            "       then count(disctinct(h.ip)) " +
+            "       then count(distinct(h.ip)) " +
             "       else count(h.ip) " +
             "   end " +
             ") " +
             "from HitEntity h " +
-            "where (h.timestamp between :start and :end)" +
-            "   and h.uri in :uris " +
+            "where h.timestamp between :start and :end" +
+            "   and :uris is null or h.uri in :uris " +
             "group by h.app, h.uri " +
             "order by 3 desc")
     List<ResponseHitDto> getStats(@Param("start") LocalDateTime start,

@@ -23,6 +23,7 @@ public class StatisticsServiceImpl implements StatisticService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ResponseHitDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
         return repository.getStats(start, end, uris, unique);
     }
