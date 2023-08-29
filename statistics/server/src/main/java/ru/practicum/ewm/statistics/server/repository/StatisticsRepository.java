@@ -20,7 +20,7 @@ public interface StatisticsRepository extends JpaRepository<HitEntity, Long> {
             ") " +
             "from HitEntity h " +
             "where h.timestamp between :start and :end" +
-            "   and (:uris is null or h.uri in :uris) " +
+            "   and (coalesce(:uris, null) is null or h.uri in :uris) " +
             "group by h.app, h.uri " +
             "order by 3 desc")
     List<ResponseHitDto> getStats(LocalDateTime start,
