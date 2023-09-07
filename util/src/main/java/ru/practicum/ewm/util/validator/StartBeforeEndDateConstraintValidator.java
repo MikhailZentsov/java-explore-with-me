@@ -10,20 +10,19 @@ import java.time.LocalDateTime;
 public class StartBeforeEndDateConstraintValidator implements ConstraintValidator<StartBeforeEndDateConstraint, Object[]> {
 
     @Override
-    public boolean isValid(Object[] value,
-                           ConstraintValidatorContext context) {
-
-        if (value[0] == null || value[1] == null) {
+    public boolean isValid(Object[] values, ConstraintValidatorContext context) {
+        if (values[0] == null || values[1] == null) {
             return true;
         }
 
-        if (!(value[0] instanceof LocalDateTime)
-                || !(value[1] instanceof LocalDateTime)) {
+        if (!(values[0] instanceof LocalDateTime) || !(values[1] instanceof LocalDateTime)) {
             throw new IllegalArgumentException(
-                    "Illegal method signature, expected two parameters of type LocalDate.");
+                    "Illegal method signature, expected two parameters of type LocalDateTime.");
         }
 
-        return ((LocalDateTime) value[0]).isAfter(LocalDateTime.now())
-                && ((LocalDateTime) value[0]).isBefore((LocalDateTime) value[1]);
+        LocalDateTime start = (LocalDateTime) values[0];
+        LocalDateTime end = (LocalDateTime) values[1];
+
+        return start.isBefore(end);
     }
 }
