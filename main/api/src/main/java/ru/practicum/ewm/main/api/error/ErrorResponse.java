@@ -21,6 +21,6 @@ public class ErrorResponse {
 
     String message;
 
-    @JsonFormat(pattern= DATE_TIME_FORMAT)
+    @JsonFormat(pattern = DATE_TIME_FORMAT)
     LocalDateTime timestamp;
 }
