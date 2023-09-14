@@ -5,6 +5,7 @@ services:
     container_name: ewm-main-server
     ports:
       - "8080:8080"
+      - "8091:8091"
     depends_on:
       [ main-db,
         statistics-server ]

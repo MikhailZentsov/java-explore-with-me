@@ -18,8 +18,8 @@ public class StatisticsServiceImpl implements StatisticService {
     private final StatisticsRepository repository;
 
     @Override
-    public void createHit(RequestHitDto hitDto) {
-        repository.save(HitMapper.toHitEntityFromRequestHitDto(hitDto));
+    public RequestHitDto createHit(RequestHitDto hitDto) {
+        return  HitMapper.toRequestHitDto(repository.save(HitMapper.toHitEntityFromRequestHitDto(hitDto)));
     }
 
     @Override

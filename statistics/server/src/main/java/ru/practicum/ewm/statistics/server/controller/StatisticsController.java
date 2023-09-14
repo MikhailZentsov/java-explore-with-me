@@ -14,7 +14,6 @@ import ru.practicum.ewm.statistics.dto.RequestHitDto;
 import ru.practicum.ewm.statistics.dto.ResponseHitDto;
 import ru.practicum.ewm.statistics.server.service.StatisticService;
 import ru.practicum.ewm.util.aspect.log.ToLog;
-import ru.practicum.ewm.util.validator.StartBeforeEndDateConstraint;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -32,12 +31,12 @@ public class StatisticsController {
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createHit(@RequestBody @Valid RequestHitDto hitDto) {
-        service.createHit(hitDto);
+    public RequestHitDto createHit(@RequestBody @Valid RequestHitDto hitDto) {
+        return service.createHit(hitDto);
     }
 
     @GetMapping("/stats")
-    @StartBeforeEndDateConstraint
+    //@StartBeforeEndDateConstraint
     public Collection<ResponseHitDto> getStats(@RequestParam(name = "start") @DateTimeFormat(fallbackPatterns = DATE_TIME_FORMAT) LocalDateTime start,
                                                @RequestParam(name = "end") @DateTimeFormat(fallbackPatterns = DATE_TIME_FORMAT) LocalDateTime end,
                                                @RequestParam(name = "uris", required = false) List<String> uris,

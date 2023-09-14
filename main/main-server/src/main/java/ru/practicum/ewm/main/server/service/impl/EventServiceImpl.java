@@ -150,10 +150,6 @@ public class EventServiceImpl implements EventService {
                                             int from,
                                             int size,
                                             HttpServletRequest httpServletRequest) {
-        if (start == null) {
-            start = LocalDateTime.now();
-        }
-
         BooleanBuilder builder = makeBuilder(Collections.emptyList(),
                 categories,
                 Collections.emptyList(),
@@ -179,9 +175,11 @@ public class EventServiceImpl implements EventService {
                 .map(eventMapper::toEventShortDto)
                 .collect(Collectors.toList());
 
-        Map<Long, Long> views = getViews(dtos);
+        if (!dtos.isEmpty()) {
+            Map<Long, Long> views = getViews(dtos);
 
-        dtos.forEach(dto -> dto.setViews(views.get(dto.getId())));
+            dtos.forEach(dto -> dto.setViews(views.get(dto.getId())));
+        }
 
         return dtos;
     }
@@ -435,7 +433,7 @@ public class EventServiceImpl implements EventService {
 
     private Map<Long, Long> getViews(Collection<EventShortDto> dtos) {
         List<String> uris = dtos.stream()
-                .map(dto -> "/events" + dto.getId())
+                .map(dto -> "/events/" + dto.getId())
                 .collect(Collectors.toList());
 
         List<Long> ids = dtos.stream()
@@ -443,13 +441,15 @@ public class EventServiceImpl implements EventService {
                 .collect(Collectors.toList());
 
         JPAQueryFactory query = new JPAQueryFactory(entityManager);
-        QEvent event = QEvent.event;
+        QEvent qEvent = QEvent.event;
 
-        LocalDateTime startTime = query
-                .selectFrom(event)
-                .where(event.id.in(ids))
-                .orderBy(event.createdOn.asc())
-                .fetchFirst().getPublishedOn();
+        Event event = query
+                .selectFrom(qEvent)
+                .where(qEvent.id.in(ids))
+                .orderBy(qEvent.createdOn.asc())
+                .fetchFirst();
+
+        LocalDateTime startTime = event.getCreatedOn();
 
         List<ResponseHitDto> hits = statisticsClient.getStats(startTime,
                 LocalDateTime.now(),

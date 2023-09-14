@@ -2,7 +2,6 @@ package ru.practicum.ewm.statistics.client;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.practicum.ewm.statistics.dto.RequestHitDto;
 import ru.practicum.ewm.statistics.dto.ResponseHitDto;
@@ -39,7 +38,7 @@ public class StatisticsClient {
                 .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .bodyValue(hitDto)
                 .retrieve()
-                .bodyToMono(ResponseEntity.class)
+                .bodyToMono(RequestHitDto.class)
                 .block();
     }
 
@@ -47,7 +46,7 @@ public class StatisticsClient {
 
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/hit")
+                        .path("/stats")
                         .queryParam("start", start.format(DATE_TIME_FORMATTER))
                         .queryParam("end", end.format(DATE_TIME_FORMATTER))
                         .queryParam("uris", String.join(", ", uris))
