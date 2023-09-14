@@ -62,9 +62,9 @@ public class RequestServiceImpl implements RequestService {
 
         if (!event.getRequestModeration() || event.getParticipantLimit() == 0) {
             request.setStatus(RequestStatus.CONFIRMED);
+            event.setConfirmedRequests(event.getConfirmedRequests() + 1);
         }
 
-        event.setConfirmedRequests(event.getConfirmedRequests() + 1);
         eventRepository.save(event);
 
         return mapper.toParticipationRequestDto(requestRepository.save(request));

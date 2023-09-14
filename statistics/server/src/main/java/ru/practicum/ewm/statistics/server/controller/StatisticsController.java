@@ -36,11 +36,10 @@ public class StatisticsController {
     }
 
     @GetMapping("/stats")
-    //@StartBeforeEndDateConstraint
-    public Collection<ResponseHitDto> getStats(@RequestParam(name = "start") @DateTimeFormat(fallbackPatterns = DATE_TIME_FORMAT) LocalDateTime start,
-                                               @RequestParam(name = "end") @DateTimeFormat(fallbackPatterns = DATE_TIME_FORMAT) LocalDateTime end,
-                                               @RequestParam(name = "uris", required = false) List<String> uris,
-                                               @RequestParam(name = "unique", defaultValue = "false") boolean unique) {
+    public Collection<ResponseHitDto> getStats(@RequestParam @DateTimeFormat(fallbackPatterns = DATE_TIME_FORMAT) LocalDateTime start,
+                                               @RequestParam @DateTimeFormat(fallbackPatterns = DATE_TIME_FORMAT) LocalDateTime end,
+                                               @RequestParam(required = false) List<String> uris,
+                                               @RequestParam(defaultValue = "false") boolean unique) {
         return service.getStats(start, end, uris, unique);
     }
 }
