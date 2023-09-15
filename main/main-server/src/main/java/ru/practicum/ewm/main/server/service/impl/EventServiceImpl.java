@@ -29,6 +29,8 @@ import ru.practicum.ewm.main.server.entity.User;
 import ru.practicum.ewm.main.server.mapper.EventMapper;
 import ru.practicum.ewm.main.server.mapper.LocationMapper;
 import ru.practicum.ewm.main.server.mapper.RequestMapper;
+import ru.practicum.ewm.main.server.model.EventGetAllByAdminParameters;
+import ru.practicum.ewm.main.server.model.EventGetAllParameters;
 import ru.practicum.ewm.main.server.repository.CategoryRepository;
 import ru.practicum.ewm.main.server.repository.EventRepository;
 import ru.practicum.ewm.main.server.repository.RequestRepository;
@@ -140,16 +142,18 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Collection<EventShortDto> getAll(String text,
-                                            List<Long> categories,
-                                            Boolean paid,
-                                            LocalDateTime start,
-                                            LocalDateTime end,
-                                            Boolean onlyAvailable,
-                                            EventSort eventSort,
-                                            int from,
-                                            int size,
-                                            HttpServletRequest httpServletRequest) {
+    public Collection<EventShortDto> getAll(EventGetAllParameters parameters) {
+        String text = parameters.getText();
+        List<Long> categories = parameters.getCategories();
+        Boolean paid = parameters.getPaid();
+        LocalDateTime start = parameters.getStart();
+        LocalDateTime end = parameters.getEnd();
+        Boolean onlyAvailable = parameters.getOnlyAvailable();
+        EventSort eventSort = parameters.getEventSort();
+        int from = parameters.getFrom();
+        int size = parameters.getSize();
+        HttpServletRequest httpServletRequest = parameters.getHttpServletRequest();
+
         BooleanBuilder builder = makeBuilder(Collections.emptyList(),
                 categories,
                 Collections.emptyList(),
@@ -185,13 +189,14 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Collection<EventFullDto> getAllByAdmin(List<Long> users,
-                                                  List<EventStatus> states,
-                                                  List<Long> categories,
-                                                  LocalDateTime start,
-                                                  LocalDateTime end,
-                                                  int from,
-                                                  int size) {
+    public Collection<EventFullDto> getAllByAdmin(EventGetAllByAdminParameters parameters) {
+        List<Long> users = parameters.getUsers();
+        List<EventStatus> states = parameters.getStates();
+        List<Long> categories = parameters.getCategories();
+        LocalDateTime start = parameters.getStart();
+        LocalDateTime end = parameters.getEnd();
+        int from = parameters.getFrom();
+        int size = parameters.getSize();
 
         BooleanBuilder builder = makeBuilder(users,
                 categories,

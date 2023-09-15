@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.main.api.event.EventFullDto;
 import ru.practicum.ewm.main.api.event.EventShortDto;
 import ru.practicum.ewm.main.api.event.EventSort;
+import ru.practicum.ewm.main.server.model.EventGetAllParameters;
 import ru.practicum.ewm.main.server.service.EventService;
 import ru.practicum.ewm.util.aspect.log.ToLog;
 import ru.practicum.ewm.util.validator.StartBeforeEndDateConstraint;
@@ -46,7 +47,18 @@ public class PublicEventController {
             @RequestParam(defaultValue = "0") @Min(0) int from,
             @RequestParam(defaultValue = "10") @Min(1) int size,
             HttpServletRequest httpRequest) {
-        return service.getAll(text, categories, paid, start, end, onlyAvailable, sort, from, size, httpRequest);
+        return service.getAll(EventGetAllParameters.builder()
+                        .start(start)
+                        .end(end)
+                        .text(text)
+                        .categories(categories)
+                        .paid(paid)
+                        .onlyAvailable(onlyAvailable)
+                        .eventSort(sort)
+                        .from(from)
+                        .size(size)
+                        .httpServletRequest(httpRequest)
+                .build());
     }
 
     @GetMapping("/{eventId}")

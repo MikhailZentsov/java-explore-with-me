@@ -6,12 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.practicum.ewm.util.constant.Constants;
 import ru.practicum.ewm.util.validator.DateAfterValueHourFutureConstraint;
 
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-
-import static ru.practicum.ewm.util.constant.Constants.DATE_TIME_FORMAT;
 
 @Getter
 @Setter
@@ -41,7 +40,7 @@ public class EventUpdateAdminRequest extends EventUpdateRequest {
 
     private StateAction stateAction;
 
-    @JsonFormat(pattern = DATE_TIME_FORMAT)
-    @DateAfterValueHourFutureConstraint(value = "1")
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
+    @DateAfterValueHourFutureConstraint(value = Constants.ONE_AS_STRING)
     private LocalDateTime eventDate;
 }

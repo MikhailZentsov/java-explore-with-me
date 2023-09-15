@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
+import ru.practicum.ewm.util.constant.Constants;
 
 import java.time.LocalDateTime;
-
-import static ru.practicum.ewm.util.constant.Constants.DATE_TIME_FORMAT;
 
 
 @AllArgsConstructor
@@ -21,6 +20,6 @@ public class ErrorResponse {
 
     String message;
 
-    @JsonFormat(pattern = DATE_TIME_FORMAT)
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     LocalDateTime timestamp;
 }

@@ -16,8 +16,7 @@ public class StatisticsClient {
     private final WebClient webClient;
     private final String appName;
 
-    public StatisticsClient(String serverUrl,
-                            String appName) {
+    public StatisticsClient(String serverUrl, String appName) {
         this.webClient = WebClient.create(serverUrl);
         this.appName = appName;
     }

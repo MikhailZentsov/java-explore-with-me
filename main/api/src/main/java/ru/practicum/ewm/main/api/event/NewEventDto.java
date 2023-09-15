@@ -3,8 +3,10 @@ package ru.practicum.ewm.main.api.event;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import ru.practicum.ewm.util.constant.Constants;
 import ru.practicum.ewm.util.validator.DateAfterValueHourFutureConstraint;
 
 import javax.validation.constraints.NotBlank;
@@ -12,9 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-import static ru.practicum.ewm.util.constant.Constants.DATE_TIME_FORMAT;
-
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
@@ -45,7 +46,7 @@ public class NewEventDto {
     private Long participantLimit = 0L;
 
     @NotNull
-    @JsonFormat(pattern = DATE_TIME_FORMAT)
-    @DateAfterValueHourFutureConstraint(value = "2")
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
+    @DateAfterValueHourFutureConstraint(value = Constants.TWO_AS_STRING)
     private LocalDateTime eventDate;
 }

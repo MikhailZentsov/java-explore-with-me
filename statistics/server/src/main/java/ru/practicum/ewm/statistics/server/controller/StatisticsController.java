@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import ru.practicum.ewm.statistics.dto.RequestHitDto;
 import ru.practicum.ewm.statistics.dto.ResponseHitDto;
 import ru.practicum.ewm.statistics.server.service.StatisticService;
@@ -41,9 +40,6 @@ public class StatisticsController {
                                                @RequestParam @DateTimeFormat(fallbackPatterns = DATE_TIME_FORMAT) LocalDateTime end,
                                                @RequestParam(required = false) List<String> uris,
                                                @RequestParam(defaultValue = "false") boolean unique) {
-        if (start.isAfter(end)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End cannot be early then start");
-        }
         return service.getStats(start, end, uris, unique);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.main.api.event.EventFullDto;
 import ru.practicum.ewm.main.api.event.EventStatus;
 import ru.practicum.ewm.main.api.event.EventUpdateAdminRequest;
+import ru.practicum.ewm.main.server.model.EventGetAllByAdminParameters;
 import ru.practicum.ewm.main.server.service.EventService;
 import ru.practicum.ewm.util.aspect.log.ToLog;
 import ru.practicum.ewm.util.validator.StartBeforeEndDateConstraint;
@@ -45,7 +46,15 @@ public class AdminEventController {
             @RequestParam(required = false) List<EventStatus> states,
             @RequestParam(defaultValue = "0") @Min(0) int from,
             @RequestParam(defaultValue = "10") @Min(1) int size) {
-        return service.getAllByAdmin(users, states, categories, start, end, from, size);
+        return service.getAllByAdmin(EventGetAllByAdminParameters.builder()
+                .start(start)
+                .end(end)
+                .users(users)
+                .categories(categories)
+                .states(states)
+                .from(from)
+                .size(size)
+                .build());
     }
 
     @PatchMapping("/{eventId}")

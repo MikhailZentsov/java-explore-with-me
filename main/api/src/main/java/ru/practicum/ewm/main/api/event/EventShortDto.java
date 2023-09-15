@@ -3,16 +3,17 @@ package ru.practicum.ewm.main.api.event;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.practicum.ewm.main.api.category.CategoryDto;
 import ru.practicum.ewm.main.api.user.UserShortDto;
+import ru.practicum.ewm.util.constant.Constants;
 
 import java.time.LocalDateTime;
 
-import static ru.practicum.ewm.util.constant.Constants.DATE_TIME_FORMAT;
-
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
@@ -26,6 +27,6 @@ public class EventShortDto {
     private Long confirmedRequests;
     private Long views;
 
-    @JsonFormat(pattern = DATE_TIME_FORMAT)
+    @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     private LocalDateTime eventDate;
 }
