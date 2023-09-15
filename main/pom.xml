@@ -10,6 +10,12 @@
     </parent>
 
     <artifactId>main</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>main-server</module>
+        <module>api</module>
+        <module>server-util</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

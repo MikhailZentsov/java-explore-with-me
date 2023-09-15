@@ -14,4 +14,13 @@ public class HitMapper {
                 .timestamp(hitDto.getTimestamp())
                 .build();
     }
+
+    public RequestHitDto toRequestHitDto(HitEntity entity) {
+        return RequestHitDto.builder()
+                .app(entity.getApp())
+                .uri(entity.getUri())
+                .ip(entity.getIp())
+                .timestamp(entity.getTimestamp())
+                .build();
+    }
 }

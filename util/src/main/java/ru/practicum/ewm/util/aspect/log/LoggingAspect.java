@@ -18,13 +18,13 @@ public class LoggingAspect {
         String methodName = joinPoint.getSignature().getName();
         Object[] arguments = joinPoint.getArgs();
 
-        log.debug("Method " + methodName +
+        log.info("Method " + methodName +
                 " with parameters " + Arrays.asList(arguments) +
                 " will execute");
 
         Object returnedByMethod = joinPoint.proceed();
 
-        log.debug("Method " + methodName +
+        log.info("Method " + methodName +
                 " executed and returned " + returnedByMethod);
 
         return returnedByMethod;
