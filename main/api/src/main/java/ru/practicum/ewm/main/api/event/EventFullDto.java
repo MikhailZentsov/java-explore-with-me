@@ -31,6 +31,7 @@ public class EventFullDto {
     private Long confirmedRequests;
     private Long views;
     private String state;
+    private String moderationComment;
 
     @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     private LocalDateTime eventDate;

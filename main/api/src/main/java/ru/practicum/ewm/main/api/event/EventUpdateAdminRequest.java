@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.practicum.ewm.util.constant.Constants;
 import ru.practicum.ewm.util.validator.DateAfterValueHourFutureConstraint;
+import ru.practicum.ewm.util.validator.EnumAllowedConstraint;
 
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -38,7 +39,11 @@ public class EventUpdateAdminRequest extends EventUpdateRequest {
 
     private Long participantLimit;
 
+    @EnumAllowedConstraint(enumClass = StateAction.class, allowed = {"PUBLISH_EVENT", "REJECT_EVENT"})
     private StateAction stateAction;
+
+    @Size(min = 10, max = 2000)
+    private String moderationComment;
 
     @JsonFormat(pattern = Constants.DATE_TIME_FORMAT)
     @DateAfterValueHourFutureConstraint(value = Constants.ONE_AS_STRING)

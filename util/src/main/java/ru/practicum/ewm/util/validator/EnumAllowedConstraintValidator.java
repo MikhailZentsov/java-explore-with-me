@@ -21,6 +21,6 @@ public class EnumAllowedConstraintValidator implements ConstraintValidator<EnumA
 
     @Override
     public boolean isValid(Enum<?> value, ConstraintValidatorContext context) {
-        return enumValues.contains(value.toString()) && allowedValues.contains(value.toString());
+        return value == null || enumValues.contains(value.toString()) && allowedValues.contains(value.toString());
     }
 }
