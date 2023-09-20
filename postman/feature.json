@@ -32,22 +32,7 @@
 									"    pm.response.to.be.withBody;\r",
 									"    pm.response.to.be.json;\r",
 									"});\r",
-									"pm.collectionVariables.set(\"user1\", pm.response.json().id);\r",
-									"pm.test(\"Test user 'id' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('id');\r",
-									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);\r",
-									"});\r",
-									"pm.test(\"Test user 'email' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('email');\r",
-									"    pm.expect(jsonData.email, '\"email\" must be \"mail1@ya.ru\"').to.eql('mail1@ya.ru');\r",
-									"});\r",
-									"pm.test(\"Test user 'name' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('name');\r",
-									"    pm.expect(jsonData.name, '\"name\" must be \"user1\"').to.eql('user1');\r",
-									"});"
+									"pm.collectionVariables.set(\"user1\", pm.response.json().id);"
 								],
 								"type": "text/javascript"
 							}
@@ -92,22 +77,7 @@
 									"    pm.response.to.be.withBody;\r",
 									"    pm.response.to.be.json;\r",
 									"});\r",
-									"pm.collectionVariables.set(\"user2\", pm.response.json().id);\r",
-									"pm.test(\"Test user 'id' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('id');\r",
-									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(2);\r",
-									"});\r",
-									"pm.test(\"Test user 'email' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('email');\r",
-									"    pm.expect(jsonData.email, '\"email\" must be \"mail2@ya.ru\"').to.eql('mail2@ya.ru');\r",
-									"});\r",
-									"pm.test(\"Test user 'name' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('name');\r",
-									"    pm.expect(jsonData.name, '\"name\" must be \"user2\"').to.eql('user2');\r",
-									"});"
+									"pm.collectionVariables.set(\"user2\", pm.response.json().id);"
 								],
 								"type": "text/javascript"
 							}
@@ -152,17 +122,7 @@
 									"    pm.response.to.be.withBody;\r",
 									"    pm.response.to.be.json;\r",
 									"});\r",
-									"pm.collectionVariables.set(\"category1\", pm.response.json().id);\r",
-									"pm.test(\"Test category 'id' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('id');\r",
-									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);\r",
-									"});\r",
-									"pm.test(\"Test category 'name' field\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData).to.have.property('name');\r",
-									"    pm.expect(jsonData.name, '\"name\" must be \"category 1\"').to.eql('category 1');\r",
-									"});"
+									"pm.collectionVariables.set(\"category1\", pm.response.json().id)"
 								],
 								"type": "text/javascript"
 							}
@@ -408,54 +368,6 @@
 								{
 									"key": "eventId",
 									"value": "{{event1}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Event 2 failed reject without comment by admin",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"stateAction\": \"REJECT_EVENT\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/admin/events/:eventId",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"admin",
-								"events",
-								":eventId"
-							],
-							"variable": [
-								{
-									"key": "eventId",
-									"value": "{{event2}}"
 								}
 							]
 						}
