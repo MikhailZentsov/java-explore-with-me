@@ -32,6 +32,7 @@
 									"    pm.response.to.be.withBody;\r",
 									"    pm.response.to.be.json;\r",
 									"});\r",
+									"pm.collectionVariables.set(\"user1\", pm.response.json().id);\r",
 									"pm.test(\"Test user 'id' field\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData).to.have.property('id');\r",
@@ -91,6 +92,7 @@
 									"    pm.response.to.be.withBody;\r",
 									"    pm.response.to.be.json;\r",
 									"});\r",
+									"pm.collectionVariables.set(\"user2\", pm.response.json().id);\r",
 									"pm.test(\"Test user 'id' field\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData).to.have.property('id');\r",
@@ -150,6 +152,7 @@
 									"    pm.response.to.be.withBody;\r",
 									"    pm.response.to.be.json;\r",
 									"});\r",
+									"pm.collectionVariables.set(\"category1\", pm.response.json().id);\r",
 									"pm.test(\"Test category 'id' field\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData).to.have.property('id');\r",
@@ -200,11 +203,11 @@
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
 									"});",
-									"",
 									"pm.test(\"Has events update response\", function () {",
 									"    pm.response.to.be.withBody;",
 									"    pm.response.to.be.json;",
 									"});",
+									"pm.collectionVariables.set(\"event1\", pm.response.json().id);",
 									""
 								],
 								"type": "text/javascript"
@@ -216,7 +219,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"title1\",\n    \"annotation\": \"annotation for event one\",\n    \"category\": 1,\n    \"description\": \"Long text for event description\",\n    \"location\": {\n        \"lat\": 40.01,\n        \"lon\": 20.4040\n    },\n    \"eventDate\": \"2025-01-01 12:00:00\",\n    \"paid\": true,\n    \"participantLimit\": 1000,\n    \"requestModeration\": false\n}",
+							"raw": "{\n    \"title\": \"title1\",\n    \"annotation\": \"annotation for event one\",\n    \"category\": {{category1}},\n    \"description\": \"Long text for event description\",\n    \"location\": {\n        \"lat\": 40.01,\n        \"lon\": 20.4040\n    },\n    \"eventDate\": \"2025-01-01 12:00:00\",\n    \"paid\": true,\n    \"participantLimit\": 1000,\n    \"requestModeration\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -236,7 +239,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "1"
+									"value": "{{user1}}"
 								}
 							]
 						}
@@ -253,11 +256,11 @@
 									"pm.test(\"Status code is 201\", function () {",
 									"    pm.response.to.have.status(201);",
 									"});",
-									"",
 									"pm.test(\"Has events update response\", function () {",
 									"    pm.response.to.be.withBody;",
 									"    pm.response.to.be.json;",
 									"});",
+									"pm.collectionVariables.set(\"event2\", pm.response.json().id);",
 									""
 								],
 								"type": "text/javascript"
@@ -269,7 +272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"title2\",\n    \"annotation\": \"annotation for event two\",\n    \"category\": 1,\n    \"description\": \"Long text for event description\",\n    \"location\": {\n        \"lat\": 50.01,\n        \"lon\": 30.4040\n    },\n    \"eventDate\": \"2025-01-01 21:00:00\",\n    \"paid\": true,\n    \"participantLimit\": 1000,\n    \"requestModeration\": false\n}",
+							"raw": "{\n    \"title\": \"title2\",\n    \"annotation\": \"annotation for event two\",\n    \"category\": {{category1}},\n    \"description\": \"Long text for event description\",\n    \"location\": {\n        \"lat\": 50.01,\n        \"lon\": 30.4040\n    },\n    \"eventDate\": \"2025-01-01 21:00:00\",\n    \"paid\": true,\n    \"participantLimit\": 1000,\n    \"requestModeration\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -289,7 +292,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "{{user2}}"
 								}
 							]
 						}
@@ -331,7 +334,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/admin/events?states=PENDING",
+							"raw": "{{baseUrl}}/admin/events?states=PENDING&users={{user1}},{{user2}}",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -343,6 +346,10 @@
 								{
 									"key": "states",
 									"value": "PENDING"
+								},
+								{
+									"key": "users",
+									"value": "{{user1}},{{user2}}"
 								}
 							]
 						}
@@ -400,7 +407,7 @@
 							"variable": [
 								{
 									"key": "eventId",
-									"value": "1"
+									"value": "{{event1}}"
 								}
 							]
 						}
@@ -448,7 +455,7 @@
 							"variable": [
 								{
 									"key": "eventId",
-									"value": "2"
+									"value": "{{event2}}"
 								}
 							]
 						}
@@ -510,7 +517,7 @@
 							"variable": [
 								{
 									"key": "eventId",
-									"value": "2"
+									"value": "{{event2}}"
 								}
 							]
 						}
@@ -573,11 +580,11 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "2"
+									"value": "{{user2}}"
 								},
 								{
 									"key": "eventId",
-									"value": "2"
+									"value": "{{event2}}"
 								}
 							]
 						}
@@ -639,7 +646,7 @@
 							"variable": [
 								{
 									"key": "eventId",
-									"value": "2"
+									"value": "{{event2}}"
 								}
 							]
 						}
@@ -673,6 +680,31 @@
 		{
 			"key": "baseUrl",
 			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "user1",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "user2",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "category1",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "event1",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "event2",
+			"value": "1",
 			"type": "string"
 		}
 	]
