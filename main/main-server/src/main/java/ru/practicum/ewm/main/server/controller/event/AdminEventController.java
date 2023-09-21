@@ -41,6 +41,7 @@ public class AdminEventController {
             @DateTimeFormat(pattern = DATE_TIME_FORMAT) LocalDateTime start,
             @RequestParam(required = false, name = "rangeEnd")
             @DateTimeFormat(pattern = DATE_TIME_FORMAT) LocalDateTime end,
+            @RequestParam(required = false) Boolean onlyPending,
             @RequestParam(required = false) List<Long> users,
             @RequestParam(required = false) List<Long> categories,
             @RequestParam(required = false) List<EventStatus> states,
@@ -49,6 +50,7 @@ public class AdminEventController {
         return service.getAllByAdmin(EventGetAllByAdminParameters.builder()
                 .start(start)
                 .end(end)
+                .onlyPending(onlyPending)
                 .users(users)
                 .categories(categories)
                 .states(states)

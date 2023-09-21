@@ -48,6 +48,9 @@ public class Event {
     @Column(name = "description", length = 7000)
     private String description;
 
+    @Column(name = "moderation_comment", length = 2000)
+    private String moderationComment;
+
     @Column(name = "create_date")
     private LocalDateTime createdOn;
 

@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS event
     confirmed_requests BIGINT  DEFAULT 0,
     views              BIGINT,
     state              VARCHAR(16),
+    moderation_comment VARCHAR(2000),
     create_date        TIMESTAMP WITHOUT TIME ZONE,
     published_date     TIMESTAMP WITHOUT TIME ZONE,
     CONSTRAINT PK_EVENT PRIMARY KEY (id),

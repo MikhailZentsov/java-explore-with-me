@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.ewm.main.api.error.ErrorResponse;
 import ru.practicum.ewm.main.util.exception.AlreadyExistsException;
+import ru.practicum.ewm.main.util.exception.BadRequestException;
 import ru.practicum.ewm.main.util.exception.NotFoundException;
 import ru.practicum.ewm.util.aspect.log.ToLog;
 
@@ -39,7 +40,8 @@ public class ErrorHandler {
                 .build();
     }
 
-    @ExceptionHandler({ValidationException.class})
+    @ExceptionHandler({ValidationException.class,
+            BadRequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleBadRequest(final RuntimeException e) {
         return ErrorResponse.builder()

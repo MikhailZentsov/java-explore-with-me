@@ -14,6 +14,7 @@ import java.util.List;
 public class EventGetAllByAdminParameters {
     private LocalDateTime start;
     private LocalDateTime end;
+    private Boolean onlyPending;
     private List<Long> users;
     private List<Long> categories;
     private List<EventStatus> states;
